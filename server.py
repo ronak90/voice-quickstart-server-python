@@ -15,7 +15,7 @@ CALLER_ID = 'quick_start'
 
 app = Flask(__name__)
 
-@app.route('/accessToken')
+@app.route('/accessToken',methods=['GET', 'POST'])
 def token():
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
@@ -23,6 +23,8 @@ def token():
   push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
   app_sid = os.environ.get("APP_SID", APP_SID)
   
+  
+  identity = request.POST['socialId']
 
   grant = VoiceGrant(
     push_credential_sid=push_credential_sid,
