@@ -22,16 +22,20 @@ def token():
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
   push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
   app_sid = os.environ.get("APP_SID", APP_SID)
+  
+  identity = request.POST['socialId']
 
   grant = VoiceGrant(
     push_credential_sid=push_credential_sid,
     outgoing_application_sid=app_sid
   )
 
-  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
 
   return str(token)
+  return json.dumps(identity: identity,
+        token: token)
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
@@ -50,7 +54,10 @@ def placeCall():
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
-
+  
+  IDENTITY = request.POST['To']
+  CALLER_ID = request.POST['From']
+  
   client = Client(api_key, api_key_secret, account_sid)
   call = client.calls.create(url=request.url_root + 'incoming', to='client:' + IDENTITY, from_='client:' + CALLER_ID)
   return str(call.sid)
