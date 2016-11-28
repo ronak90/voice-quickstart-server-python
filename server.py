@@ -3,7 +3,7 @@ from flask import Flask, request
 from twilio.jwt.access_token import AccessToken, VoiceGrant
 from twilio.rest import Client
 import twilio.twiml
-import json
+from json import JSONEncoder
 
 ACCOUNT_SID = 'AC***'
 API_KEY = 'SK***'
