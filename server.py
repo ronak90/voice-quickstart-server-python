@@ -34,7 +34,9 @@ def token():
   token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
 
-  return str(token)
+  return json.dumps(identity: identity,token: token)
+
+ 
   
 
 @app.route('/outgoing', methods=['GET', 'POST'])
@@ -54,6 +56,9 @@ def placeCall():
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
+  
+  IDENTITY = request.form['To']
+  CALLER_ID = request.form['From']
   
   client = Client(api_key, api_key_secret, account_sid)
   call = client.calls.create(url=request.url_root + 'incoming', to='client:' + IDENTITY, from_='client:' + CALLER_ID)
