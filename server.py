@@ -24,7 +24,7 @@ def token():
   app_sid = os.environ.get("APP_SID", APP_SID)
   
   
-  identity = request.POST['socialId']
+  identity = request.form['socialId']
 
   grant = VoiceGrant(
     push_credential_sid=push_credential_sid,
