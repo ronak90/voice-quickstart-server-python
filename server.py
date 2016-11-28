@@ -37,8 +37,9 @@ def token():
   token.add_grant(grant)
 
   response={'identity':identity,'token':token}
-  return(json.JSONEncoder().encode(response))
-
+  
+  return json.dumps(response)
+ 
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
