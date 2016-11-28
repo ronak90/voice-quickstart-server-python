@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request
+from flask import Flask, Response , request
 from twilio.jwt.access_token import AccessToken, VoiceGrant
 from twilio.rest import Client
 import twilio.twiml
@@ -37,9 +37,7 @@ def token():
   token.add_grant(grant)
 
   response={'identity':identity,'token':str(token)}
-  
-  return json.dumps(response)
- 
+  return Response(json.dumps(response),  mimetype='application/json')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
