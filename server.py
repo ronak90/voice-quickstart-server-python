@@ -12,8 +12,7 @@ API_KEY_SECRET = '***'
 PUSH_CREDENTIAL_SID = 'CR***'
 APP_SID = 'AP***'
 
-IDENTITY = 'voice_test'
-CALLER_ID = 'quick_start'
+
 
 app = Flask(__name__)
 
@@ -24,6 +23,28 @@ def token():
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
   push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
   app_sid = os.environ.get("APP_SID", APP_SID)
+  
+  IDENTITY = 'sender'
+
+  grant = VoiceGrant(
+    push_credential_sid=push_credential_sid,
+    outgoing_application_sid=app_sid
+  )
+
+  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token.add_grant(grant)
+
+  return str(token)
+
+@app.route('/accessToken1')
+def token():
+  account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
+  api_key = os.environ.get("API_KEY", API_KEY)
+  api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
+  push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
+  app_sid = os.environ.get("APP_SID", APP_SID)
+  
+  IDENTITY = 'receiver'
 
   grant = VoiceGrant(
     push_credential_sid=push_credential_sid,
@@ -54,7 +75,7 @@ def placeCall():
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
 
   client = Client(api_key, api_key_secret, account_sid)
-  call = client.calls.create(url=request.url_root + 'incoming', to='client:' + IDENTITY, from_='client:' + CALLER_ID)
+  call = client.calls.create(url=request.url_root + 'incoming', to='client:' + 'receiver', from_='client:' + 'sender')
   return str(call.sid)
 
 @app.route('/', methods=['GET', 'POST'])
