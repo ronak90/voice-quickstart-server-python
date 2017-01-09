@@ -79,7 +79,7 @@ def placeCall():
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
 
   client = Client(api_key, api_key_secret, account_sid)
-  call = client.calls.create(to='client:' + 'receiver', from_='client:' + 'sender')
+  call = client.calls.create(url=request.url_root + 'incoming',to='client:' + 'receiver', from_='client:' + 'sender')
   return str(call.sid)
 
 @app.route('/', methods=['GET', 'POST'])
