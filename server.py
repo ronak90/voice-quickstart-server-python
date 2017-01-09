@@ -38,6 +38,28 @@ def token():
   return str(token)
 
 
+@app.route('/tokenAcess')
+def token():
+  IDENTITY = 'receiver'
+  
+  account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
+  api_key = os.environ.get("API_KEY", API_KEY)
+  api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
+  push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
+  app_sid = os.environ.get("APP_SID", APP_SID)
+  
+
+  grant = VoiceGrant(
+    push_credential_sid=push_credential_sid,
+    outgoing_application_sid=app_sid
+  )
+
+  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token.add_grant(grant)
+
+  return str(token)
+
+
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
   resp = twilio.twiml.Response()
