@@ -38,8 +38,8 @@ def token():
   return str(token)
 
 
-@app.route('/tokenAcess')
-def token():
+@app.route('/tokenAccess')
+def rtoken():
   IDENTITY = 'receiver'
   
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
@@ -54,10 +54,10 @@ def token():
     outgoing_application_sid=app_sid
   )
 
-  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
-  token.add_grant(grant)
+  rtoken = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  rtoken.add_grant(grant)
 
-  return str(token)
+  return str(rtoken)
 
 
 @app.route('/outgoing', methods=['GET', 'POST'])
