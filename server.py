@@ -13,6 +13,8 @@ PUSH_CREDENTIAL_SID = 'CR***'
 APP_SID = 'AP***'
 
 
+IDENTITY = 'sender'
+
 
 app = Flask(__name__)
 
