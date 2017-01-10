@@ -63,12 +63,9 @@ def rtoken():
 @app.route("/voice",methods=['GET', 'POST'])
 def voice():
     resp = twilio.twiml.Response()
-        dial = resp.dial(callerId="client:" + 'sender')
-            dial.client('receiver')
-    else:
-        resp.say("Thanks for calling!")
-
-return Response(str(resp), mimetype='text/xml')
+    dial = resp.dial(callerId="client:" + 'sender')
+    dial.client('receiver')   
+    return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
