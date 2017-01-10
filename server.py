@@ -60,6 +60,13 @@ def rtoken():
   return str(rtoken)
 
 
+@app.route('/outgoingCall', methods=['GET', 'POST'])
+def outgoingCall():
+  resp = twilio.twiml.Response()
+  with resp.dial(callerId="client:" + 'sender' as d:
+    d.client('receiver)
+  return str(resp)
+
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
   resp = twilio.twiml.Response()
