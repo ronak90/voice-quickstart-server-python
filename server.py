@@ -31,8 +31,9 @@ def token():
     push_credential_sid=push_credential_sid,
     outgoing_application_sid=app_sid
   )
-
-  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  identity = request.form['socialId']
+  
+  token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
 
   response={'identity':identity,'token':str(token)}
