@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 @app.route('/accessToken',methods=['GET', 'POST'])
 def token():
-  PUSH_SID = request.form['push_sid']
+  PUSH_SID = 'CRda1b5624596c694fa8d413f8c14b8ac7'
                           
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
