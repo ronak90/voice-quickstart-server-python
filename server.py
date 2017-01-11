@@ -39,17 +39,17 @@ def token():
   response={'identity':identity,'token':str(token)}
   return Response(json.dumps(response),  mimetype='application/json')
 
-@app.route("/voice",methods=['GET', 'POST'])
+  
+  @app.route("/voice",methods=['GET', 'POST'])
 def voice():
       
-     IDENTITY = request.form['To']
-     CALLER_ID = request.form['From']
+    IDENTITY = request.form['To']
+    CALLER_ID = request.form['From']
     
-     resp = twilio.twiml.Response()
-     dial = resp.dial(callerId=CALLER_ID)
-     dial.client(IDENTITY) 
-    
-    return Response(str(resp), mimetype='text/xml')
+    resp = twilio.twiml.Response()
+    dial = resp.dial(callerId=CALLER_ID)
+    dial.client(IDENTITY)   
+return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
