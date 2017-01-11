@@ -23,7 +23,7 @@ def token():
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
-  push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_SID)
+  push_credential_sid = PUSH_SID
   app_sid = os.environ.get("APP_SID", APP_SID)
   
   grant = VoiceGrant(
