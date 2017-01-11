@@ -18,24 +18,28 @@ IDENTITY = 'sender'
 
 app = Flask(__name__)
 
-@app.route('/accessToken')
+
+@app.route('/accessToken',methods=['GET', 'POST'])
 def token():
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
   api_key = os.environ.get("API_KEY", API_KEY)
   api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
-  push_credential_sid = os.environ.get("PUSH_CREDENTIAL_SID", PUSH_CREDENTIAL_SID)
+  push_credential_sid = request.form['push_credential_sid']
   app_sid = os.environ.get("APP_SID", APP_SID)
   
+  
+  identity = request.form['socialId']
 
   grant = VoiceGrant(
     push_credential_sid=push_credential_sid,
     outgoing_application_sid=app_sid
   )
 
-  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
 
-  return str(token)
+  response={'identity':identity,'token':str(token)}
+  return Response(json.dumps(response), mimetype='application/json')
 
 
 @app.route('/tokenAccess')
