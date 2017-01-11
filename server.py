@@ -29,7 +29,7 @@ def token():
     outgoing_application_sid=app_sid
   )
   
-  identity = 'sender'
+  identity = request.form['socialId']
   
   token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
@@ -39,9 +39,13 @@ def token():
 
 @app.route("/voice",methods=['GET', 'POST'])
 def voice():
+  
+    to = request.form['To']
+    from = request.form['from']
+    
     resp = twilio.twiml.Response()
-    dial = resp.dial(callerId='sender')
-    dial.client('receiver')   
+    dial = resp.dial(callerId=from)
+    dial.client(to)   
     return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
