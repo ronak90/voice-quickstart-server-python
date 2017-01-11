@@ -39,13 +39,13 @@ def token():
 
 @app.route("/voice",methods=['GET', 'POST'])
 def voice():
-  
-    to = request.form['To']
-    from = request.form['from']
+      
+    IDENTITY = request.form['To']
+    CALLER_ID = request.form['From']
     
     resp = twilio.twiml.Response()
-    dial = resp.dial(callerId=from)
-    dial.client(to)   
+    dial = resp.dial(callerId=CALLER_ID)
+    dial.client(IDENTITY)   
     return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
