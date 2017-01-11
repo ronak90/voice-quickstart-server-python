@@ -13,9 +13,6 @@ PUSH_CREDENTIAL_SID = 'CR***'
 APP_SID = 'AP***'
 
 
-IDENTITY = 'sender'
-
-
 app = Flask(__name__)
 
 @app.route('/accessToken',methods=['GET', 'POST'])
@@ -31,7 +28,8 @@ def token():
     push_credential_sid=push_credential_sid,
     outgoing_application_sid=app_sid
   )
-  identity = request.form['socialId']
+  
+  identity = 'sender'
   
   token = AccessToken(account_sid, api_key, api_key_secret, identity)
   token.add_grant(grant)
