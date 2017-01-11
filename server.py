@@ -35,10 +35,10 @@ def token():
   token.add_grant(grant)
 
   response={'identity':identity,'token':str(token)}
-return Response(json.dumps(response), mimetype='application/json')
+  return Response(json.dumps(response), mimetype='application/json')
 
   
-  @app.route("/voice",methods=['GET', 'POST'])
+@app.route("/voice",methods=['GET', 'POST'])
 def voice():
       
     IDENTITY = request.form['To']
@@ -47,7 +47,7 @@ def voice():
     resp = twilio.twiml.Response()
     dial = resp.dial(callerId=CALLER_ID)
     dial.client(IDENTITY)   
-return Response(str(resp), mimetype='text/xml')
+    return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
 def outgoing():
