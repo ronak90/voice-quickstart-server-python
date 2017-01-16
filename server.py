@@ -52,7 +52,7 @@ def voice():
       
     client = Client(api_key, api_key_secret, account_sid)
     call = client.calls.create(to=IDENTITY,  # Any phone number
-                           from_="client:'+CALLER_ID , # Must be a valid Twilio number
+                           from_='client:' + CALLER_ID , # Must be a valid Twilio number
                            url="http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient")
     return str(call.sid)
     
