@@ -44,7 +44,10 @@ def token():
 def voice():
       
     IDENTITY = request.form['To']
-    CALLER_ID = request.form['From']
+    
+    account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
+    api_key = os.environ.get("API_KEY", API_KEY)
+    api_key_secret = os.environ.get("API_KEY_SECRET", API_KEY_SECRET)
       
     client = Client(api_key, api_key_secret, account_sid)
     call = client.calls.create(to=IDENTITY,  # Any phone number
