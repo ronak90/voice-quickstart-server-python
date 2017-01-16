@@ -46,11 +46,10 @@ def voice():
     IDENTITY = request.form['To']
     CALLER_ID = '+18559361313'
     
-    resp = twilio.twiml.Response()
-    dial = resp.dial()
+    resp = twilio.twiml.Response()   
     dial = resp.dial(callerId=CALLER_ID) 
     dial.number(IDENTITY)  
-    dial(IDENTITY)   
+    
     return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
