@@ -48,7 +48,7 @@ def voice():
     
     resp = twilio.twiml.Response()
     dial = resp.dial(callerId=CALLER_ID)
-    dial.Number(IDENTITY)   
+    dial.number(IDENTITY)   
     return Response(str(resp), mimetype='text/xml')
 
 @app.route('/outgoing', methods=['GET', 'POST'])
