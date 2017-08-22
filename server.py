@@ -13,6 +13,8 @@ API_KEY_SECRET = '***'
 PUSH_CREDENTIAL_SID = 'CR***'
 APP_SID = 'AP***'
 
+IDENTITY = '599c03149370881771287a1c'
+
 
 app = Flask(__name__)
 
