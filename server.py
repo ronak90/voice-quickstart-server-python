@@ -12,6 +12,7 @@ API_KEY_SECRET = '***'
 PUSH_CREDENTIAL_SID = 'CR***'
 APP_SID = 'AP***'
 
+IDENTITY = 'voice_test'
 
 app = Flask(__name__)
 
@@ -29,13 +30,10 @@ def token():
      outgoing_application_sid=app_sid
    )
 
-   identity = request.form['socialId']
+  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token.add_grant(grant)
 
-   token = AccessToken(account_sid, api_key, api_key_secret, identity)
-   token.add_grant(grant)
-
-   response={'identity':identity,'token':str(token)}
-   return Response(json.dumps(response), mimetype='application/json')
+  return str(token)
 
   
 @app.route("/voice",methods=['GET', 'POST'])
