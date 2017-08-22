@@ -31,9 +31,10 @@ def token():
     outgoing_application_sid=app_sid
   )
   
-  
-  
-  return str("roank")
+  token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
+  token.add_grant(grant)
+
+  return str(token)
 
   
 @app.route("/voice",methods=['GET', 'POST'])
