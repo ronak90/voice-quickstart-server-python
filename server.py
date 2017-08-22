@@ -36,7 +36,8 @@ def token():
   token = AccessToken(account_sid, api_key, api_key_secret, IDENTITY)
   token.add_grant(grant)
 
-  return str(token)
+  response={'identity':IDENTITY,'token':str(token)}
+  return Response(json.dumps(response), mimetype='application/json')
 
   
 @app.route("/voice",methods=['GET', 'POST'])
