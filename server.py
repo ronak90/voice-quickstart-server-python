@@ -16,7 +16,7 @@ APP_SID = 'AP***'
 
 app = Flask(__name__)
 
-@app.route('/accessToken')
+@app.route('/accessToken',methods=['GET', 'POST'])
 def token():
                           
   account_sid = os.environ.get("ACCOUNT_SID", ACCOUNT_SID)
@@ -31,9 +31,9 @@ def token():
     outgoing_application_sid=app_sid
   )
   
-  identity = request.form['socialId']
   
-  return str(identity)
+  
+  return str("roank")
 
   
 @app.route("/voice",methods=['GET', 'POST'])
