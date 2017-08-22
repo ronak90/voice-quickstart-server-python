@@ -33,12 +33,7 @@ def token():
   
   identity = request.form['socialId']
   
-  
-  token = AccessToken(account_sid, api_key, api_key_secret, identity)
-  token.add_grant(grant)
-
-  response={'identity':identity,'token':str(token)}
-  return Response(json.dumps(response), mimetype='application/json')
+  return str(identity)
 
   
 @app.route("/voice",methods=['GET', 'POST'])
